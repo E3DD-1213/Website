@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container-fluid px-4 d-flex flex-wrap align-items-center justify-content-between">
+        <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+            <span class="fs-2 fw-bold text-white">Eric Browning</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            Menu
+        </button>
+
+        <nav class="site-nav" id="site-nav">
+            <ul class="nav nav-pills align-items-center">
+            <li class="nav-item"><a href="production.html" class="nav-link">Event Production</a></li>
+            <li class="nav-item"><a href="resume.html" class="nav-link">Resume</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item"><a class="btn btn-sm btn-primary nav-cta" href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main></main>
+
+<script>
+    (() => {
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    })();
+</script>
+
+<script>
+    (() => {
+        const root = document.documentElement;
+        const readPercentVar = (name, fallback) => {
+        const value = getComputedStyle(root).getPropertyValue(name).trim();
+        if (!value.endsWith('%')) return fallback;
+        const parsed = parseFloat(value);
+        return Number.isFinite(parsed) ? parsed / 100 : fallback;
+        };
+
+        let targetX = readPercentVar('--cursor-x', 0.5);
+        let targetY = readPercentVar('--cursor-y', 0.5);
+        let currentX = targetX;
+        let currentY = targetY;
+        let mirrorTargetX = readPercentVar('--mirror-x', 0.5);
+        let mirrorTargetY = readPercentVar('--mirror-y', 0.5);
+        let mirrorCurrentX = mirrorTargetX;
+        let mirrorCurrentY = mirrorTargetY;
+
+        const lerp = (a, b, t) => a + (b - a) * t;
+
+        function update() {
+        let trackSpeed = 0.05;
+        let mirrorTrackSpeed = 0.05;
+
+        currentX = lerp(currentX, targetX, trackSpeed);
+        currentY = lerp(currentY, targetY, trackSpeed);
+        mirrorCurrentX = lerp(mirrorCurrentX, mirrorTargetX, mirrorTrackSpeed);
+        mirrorCurrentY = lerp(mirrorCurrentY, mirrorTargetY, mirrorTrackSpeed);
+
+        root.style.setProperty('--cursor-x', `${(currentX * 100).toFixed(2)}%`);
+        root.style.setProperty('--cursor-y', `${(currentY * 100).toFixed(2)}%`);
+        root.style.setProperty('--mirror-x', `${(mirrorCurrentX * 100).toFixed(2)}%`);
+        root.style.setProperty('--mirror-y', `${(mirrorCurrentY * 100).toFixed(2)}%`);
+
+        requestAnimationFrame(update);
+        }
+
+        window.addEventListener('mousemove', (event) => {
+        targetX = event.clientX / window.innerWidth;
+        targetY = event.clientY / window.innerHeight;
+        mirrorTargetX = 1 - targetX;
+        mirrorTargetY = 1 - targetY;
+        });
+
+        update();
+    })();
+</script>
+
+</body>
+</html>
