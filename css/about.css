@@ -1,5 +1,9 @@
 .about-container {
     margin-top: calc(80px + 5vh);
+    margin-bottom: calc(80px + 5vh);
+}
+
+.about-container {
     margin-left: 5%;
     /* margin-right: 100px; */
     display: flex;
