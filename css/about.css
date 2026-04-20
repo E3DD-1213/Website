@@ -1,0 +1,21 @@
+.about-container {
+    margin-top: calc(80px + 5vh);
+    margin-left: 5%;
+    /* margin-right: 100px; */
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    height: auto;
+}
+
+.about-container > div {
+    flex: 1;
+}
+
+.about-container img {
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+    min-width: 50%;
+    border-radius: 30px;
+}

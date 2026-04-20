@@ -6,7 +6,7 @@ padding: 4rem 1.5rem 5rem;
 
 .calendar-frame {
 width: min(100%, 760px);
-border-radius: 24px;
+border-radius: 20px;
 background: var(--glass-fill);
 box-shadow:
     0 10px 30px var(--glass-shadow),
@@ -28,7 +28,7 @@ display: block;
 width: 100%;
 height: 540px;
 border: none;
-border-radius: 24px;
+border-radius: 20px;
 }
 
 @media (max-width: 850px) {

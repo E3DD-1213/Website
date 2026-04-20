@@ -1,6 +1,6 @@
 .hero-text {
     text-align: center;
-    margin-top: 150px;
+    margin-top: 200px;
     margin-bottom: 100px;
     scale: 200%;
 }
@@ -15,6 +15,37 @@
     align-items: center;
 }
 
+.home-image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10vh;
+    padding: 0 2rem;
+    gap: 1.5rem;
+}
+
+.home-image-container > div {
+    flex: 1;
+    max-width: 32%;
+}
+
+.home-image-container img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+.want-to-talk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+    margin-bottom: 2px;
+}
+
 .index-cta {
     border-radius: 6px;
     font-weight: 600;
@@ -26,4 +57,5 @@
     align-content: center;
     color: #fff;
     scale: 160%;
+    text-decoration: none;
 }
