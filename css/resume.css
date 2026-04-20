@@ -1,6 +1,7 @@
 .resume-frame {
-    display:flex;
+    display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     height: 100vh;
+    overflow: hidden;
 }
