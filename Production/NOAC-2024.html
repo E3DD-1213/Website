@@ -3,20 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About | Eric Browning</title>
+<title>NOAC 2024 | Eric Browning</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="css/base.css" rel="stylesheet">
-<link href="css/gradient.css" rel="stylesheet">
-<link href="css/calendar.css" rel="stylesheet">
-<link href="css/contact.css" rel="stylesheet">
-<link href="css/about.css" rel="stylesheet">
+<link href="../css/base.css" rel="stylesheet">
+<link href="../css/gradient.css" rel="stylesheet">
+<link href="../css/calendar.css" rel="stylesheet">
+<link href="../css/contact.css" rel="stylesheet">
+<style>
+    .event-title {
+        margin-top: 6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .event-panels {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1.5rem;
+        padding: 0 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 4rem;
+        align-items: start;
+    }
+
+    .event-panels__images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .event-panel img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 20px;
+        display: block;
+        transition: opacity 0.2s ease;
+    }
+
+    .event-panel:hover img {
+        opacity: 0.8;
+    }
+
+    .event-panel a {
+        display: block;
+        cursor: zoom-in;
+    }
+
+    .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .lightbox:target {
+        display: flex;
+    }
+
+    .lightbox__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+    }
+
+    .lightbox__img {
+        position: relative;
+        z-index: 1;
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .lightbox__close {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.5rem;
+        z-index: 2;
+        color: #fff;
+        font-size: 2rem;
+        line-height: 1;
+        text-decoration: none;
+        opacity: 0.7;
+        transition: opacity 0.15s ease;
+    }
+
+    .lightbox__close:hover {
+        opacity: 1;
+    }
+
+    .event-panels__text {
+        background: var(--glass-fill);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 1.75rem;
+        position: sticky;
+        top: 5rem;
+        color: #f5f5f5;
+    }
+
+    .event-panels__text h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .event-panels__text p {
+        color: #a0a0a0;
+        line-height: 1.7;
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .event-panels__text p:last-child {
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 900px) {
+        .event-panels {
+            grid-template-columns: 1fr;
+        }
+
+        .event-panels__text {
+            position: static;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .event-panels__images {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 </head>
 <body>
 
 <header class="site-header">
     <div class="container-fluid px-4 d-flex flex-wrap align-items-center justify-content-between">
-        <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+        <a href="../index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
             <span class="fs-2 fw-bold text-white">Eric Browning</span>
         </a>
 
@@ -26,10 +156,10 @@
 
         <nav class="site-nav" id="site-nav">
             <ul class="nav nav-pills align-items-center">
-            <li class="nav-item"><a href="production.html" class="nav-link">Event Production</a></li>
-            <!-- <li class=""nav-item"><a href="system-design.html" class="nav-link">System Design</a></li> -->
-            <li class="nav-item"><a href="resume.html" class="nav-link">Resume</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="../production.html" class="nav-link">Event Production</a></li>
+            <!-- <li class="nav-item"><a href="../system-design.html" class="nav-link">System Design</a></li> -->
+            <li class="nav-item"><a href="../resume.html" class="nav-link">Resume</a></li>
+            <li class="nav-item"><a href="../about.html" class="nav-link">About</a></li>
             <li class="nav-item"><a class="btn btn-sm btn-primary nav-cta" href="#contact-card">Contact Me</a></li>
             </ul>
         </nav>
@@ -37,12 +167,56 @@
 </header>
 
 <main>
-    <div class="about-container">
-        <div><img src="media/photos/me-vert.webp" alt="Photo of Eric"></div>
-        <div class="about-textbox">
-            <h1>About Eric</h1>
-            <p> Eric Browning is a live audio engineer and systems designer basic in Los Angeles, California.</p>
+    <div class="event-title">
+        <h1>National Order of the Arrow Conference - 2024</h1>
+    </div>
+
+    <div class="event-panels">
+        <div class="event-panels__images">
+            <div class="event-panel">
+                <a href="#lightbox-1"><img src="../media/photos/noac.webp" alt="NOAC 2024 — Photo 1"></a>
+            </div>
+            <div class="event-panel">
+                <a href="#lightbox-2"><img src="../media/photos/noac-drums.webp" alt="NOAC 2024 — Photo 2"></a>
+            </div>
+            <div class="event-panel">
+                <a href="#lightbox-3"><img src="../media/photos/noac-console.webp" alt="NOAC 2024 — Photo 3"></a>
+            </div>
+            <div class="event-panel">
+                <a href="#lightbox-4"><img src="../media/photos/noac-audience.webp" alt="NOAC 2024 — Photo 4"></a>
+            </div>
         </div>
+
+        <div class="event-panels__text">
+            <h2>Seek New Heights</h2>
+            <p>The theme of the National Order of the Arrow Conference in 2024 was "Seek New Heights"
+                <br> <br>
+            Our team of approximately 130 technicians, designers, actors and directors took over the University of Colorado Events Center, an 11,000 seat arena on the CU Boulder Campus. We worked to build, rehearse and run 4 different themed evening shows over the course of a five-day period for the conference.
+                <br> <br>  
+            As a member of the Audio Team, I worked with the other technicians and designers to deliver a clean, polished mix to the audience. This included both A1 and A2 duties on my part, as well as some sound design and music production for the closing night show.
+            </p>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox-1">
+        <a class="lightbox__backdrop" href="#" aria-label="Close"></a>
+        <a class="lightbox__close" href="#" aria-label="Close">×</a>
+        <img class="lightbox__img" src="../media/photos/noac.webp" alt="NOAC 2024 — Photo 1">
+    </div>
+    <div class="lightbox" id="lightbox-2">
+        <a class="lightbox__backdrop" href="#" aria-label="Close"></a>
+        <a class="lightbox__close" href="#" aria-label="Close">×</a>
+        <img class="lightbox__img" src="../media/photos/noac-drums.webp" alt="NOAC 2024 — Photo 2">
+    </div>
+    <div class="lightbox" id="lightbox-3">
+        <a class="lightbox__backdrop" href="#" aria-label="Close"></a>
+        <a class="lightbox__close" href="#" aria-label="Close">×</a>
+        <img class="lightbox__img" src="../media/photos/noac-console.webp" alt="NOAC 2024 — Photo 3">
+    </div>
+    <div class="lightbox" id="lightbox-4">
+        <a class="lightbox__backdrop" href="#" aria-label="Close"></a>
+        <a class="lightbox__close" href="#" aria-label="Close">×</a>
+        <img class="lightbox__img" src="../media/photos/noac-audience.webp" alt="NOAC 2024 — Photo 4">
     </div>
 </main>
 
