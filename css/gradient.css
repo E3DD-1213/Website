@@ -1,0 +1,20 @@
+:root {
+--cursor-x: 20%;
+--cursor-y: 20%;
+--mirror-x: 80%;
+--mirror-y: 80%;
+}
+
+body {
+background-image:
+    radial-gradient(
+        circle 800px at var(--cursor-x) var(--cursor-y),
+        rgba(124, 35, 213, 0.16),
+        transparent 90%
+    ),
+    radial-gradient(
+        circle 1200px at var(--mirror-x) var(--mirror-y),
+        rgba(0, 255, 221, 0.12),
+        transparent 90%
+    );
+}
