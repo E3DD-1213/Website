@@ -214,37 +214,19 @@
 <script>
     (() => {
         const root = document.documentElement;
-        const readPercentVar = (name, fallback) => {
-        const value = getComputedStyle(root).getPropertyValue(name).trim();
-        if (!value.endsWith('%')) return fallback;
-        const parsed = parseFloat(value);
-        return Number.isFinite(parsed) ? parsed / 100 : fallback;
-        };
-
-        let targetX = readPercentVar('--cursor-x', 0.5);
-        let targetY = readPercentVar('--cursor-y', 0.5);
-        let currentX = targetX;
-        let currentY = targetY;
-        let mirrorTargetX = readPercentVar('--mirror-x', 0.5);
-        let mirrorTargetY = readPercentVar('--mirror-y', 0.5);
-        let mirrorCurrentX = mirrorTargetX;
-        let mirrorCurrentY = mirrorTargetY;
-
         const lerp = (a, b, t) => a + (b - a) * t;
 
-        function update() {
-        let trackSpeed = 0.05;
-        let mirrorTrackSpeed = 0.05;
+        let targetX = 0.8, targetY = 0.2;
+        let currentX = 0.8, currentY = 0.2;
 
-        currentX = lerp(currentX, targetX, trackSpeed);
-        currentY = lerp(currentY, targetY, trackSpeed);
-        mirrorCurrentX = lerp(mirrorCurrentX, mirrorTargetX, mirrorTrackSpeed);
-        mirrorCurrentY = lerp(mirrorCurrentY, mirrorTargetY, mirrorTrackSpeed);
+        function update() {
+        currentX = lerp(currentX, targetX, 0.05);
+        currentY = lerp(currentY, targetY, 0.05);
 
         root.style.setProperty('--cursor-x', `${(currentX * 100).toFixed(2)}%`);
         root.style.setProperty('--cursor-y', `${(currentY * 100).toFixed(2)}%`);
-        root.style.setProperty('--mirror-x', `${(mirrorCurrentX * 100).toFixed(2)}%`);
-        root.style.setProperty('--mirror-y', `${(mirrorCurrentY * 100).toFixed(2)}%`);
+        root.style.setProperty('--mirror-x', `${((1 - currentX) * 100).toFixed(2)}%`);
+        root.style.setProperty('--mirror-y', `${((1 - currentY) * 100).toFixed(2)}%`);
 
         requestAnimationFrame(update);
         }
@@ -252,8 +234,6 @@
         window.addEventListener('mousemove', (event) => {
         targetX = event.clientX / window.innerWidth;
         targetY = event.clientY / window.innerHeight;
-        mirrorTargetX = 1 - targetX;
-        mirrorTargetY = 1 - targetY;
         });
 
         update();
