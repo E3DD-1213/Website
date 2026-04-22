@@ -18,7 +18,26 @@ body {
 
 main {
     flex: 1;
+    position: relative;
+    z-index: 1;
 }
+
+/* General Frost Definition */
+    .bg-frost {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: rgba(10, 12, 18, 0.18);
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+        .bg-frost {
+            background: rgba(10, 12, 18, 0.08);
+            -webkit-backdrop-filter: blur(80px) saturate(120%);
+            backdrop-filter: blur(80px) saturate(120%);
+        }
+    }
 
 .site-header {
     position: fixed;
