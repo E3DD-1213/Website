@@ -60,3 +60,25 @@
     font-size: 60px;
 
 } */
+
+@media (max-width: 900px) {
+    .event-panel {
+        flex: 1 1 calc(50% - 1.5rem);
+        max-width: calc(50% - 0.75rem);
+    }
+}
+
+@media (max-width: 560px) {
+    .production-grid {
+        padding: 0 1rem;
+    }
+
+    .event-panel {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .production-grid-item img {
+        height: 220px;
+    }
+}
