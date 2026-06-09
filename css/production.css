@@ -40,6 +40,7 @@
     object-fit: cover;
     display: block;
     border-radius: 14px;
+    border: none;
     transition: opacity 0.2s ease;
 }
 

@@ -131,6 +131,12 @@ footer {
 }
 }
 
+/* Event page images */
+.event-panel img,
+.lightbox-img {
+    border: 1px solid var(--glass-border);
+}
+
 @media (max-width: 850px) {
 .nav-toggle {
     display: block;
